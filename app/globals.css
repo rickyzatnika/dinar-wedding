@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #C97B7B;
+  --color-champagne: #F3E7DD;
+  --color-gold: #D8B07A;
+  --color-dark: #3B2A24;
+
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background-color: #C97B7B;
+    color: white;
+  }
+}
