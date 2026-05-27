@@ -16,13 +16,13 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-30 transition-transform duration-300 bg-white/90 backdrop-blur-md shadow-sm ${
+        className={`fixed top-0 left-0 right-0 z-30 transition-transform duration-300 bg-white/80 backdrop-blur-lg border-b border-white/20 ${
           hidden ? "-translate-y-full" : "translate-y-0"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <a href="/" className="text-2xl font-bold text-[#3B2A24]">
+            <a href="/" className="text-2xl font-bold text-[#3B2A24] tracking-tight">
               {siteConfig.name}
             </a>
 
@@ -31,7 +31,7 @@ export function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-[#3B2A24]/80 hover:text-[#C97B7B] font-medium transition-colors"
+                  className="text-[#3B2A24]/70 hover:text-[#C97B7B] font-medium transition-colors text-sm tracking-wide"
                 >
                   {link.label}
                 </a>
@@ -43,7 +43,7 @@ export function Navbar() {
                 href={waUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#C97B7B] text-white px-6 py-2.5 rounded-full font-semibold hover:bg-[#b86868] transition-colors text-sm"
+                className="bg-[#D8B07A] text-white px-6 py-2.5 rounded-full font-semibold hover:bg-[#c9a06c] transition-colors text-sm shadow-md hover:shadow-lg"
               >
                 Booking Via WhatsApp
               </a>

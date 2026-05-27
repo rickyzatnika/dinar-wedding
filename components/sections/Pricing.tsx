@@ -7,19 +7,19 @@ import { FadeUp } from "@/components/animation/FadeUp";
 
 export function Pricing() {
   return (
-    <section id="paket" className="py-24 bg-[#F3E7DD]/30">
+    <section id="paket" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
           label="Paket"
           title="Pilih Paket Sesuai Kebutuhan"
           subtitle="Kami menawarkan berbagai paket rias pengantin yang bisa disesuaikan."
         />
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {packages.map((pkg, i) => (
             <FadeUp key={pkg.id} delay={i * 0.12}>
               <Card highlight={pkg.isPopular} className="flex flex-col relative">
                 {pkg.isPopular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#C97B7B] text-white text-xs font-semibold px-4 py-1 rounded-full">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#D8B07A] text-white text-xs font-semibold px-4 py-1 rounded-full">
                     Terpopuler
                   </span>
                 )}

@@ -79,39 +79,51 @@ export const testimonials: Testimonial[] = [
 export const galleryImages: GalleryImage[] = [
   {
     id: "1",
-    src: "/gallery/gallery-1.jpg",
+    src: "/gallery/1.png",
     alt: "Rias pengantin elegan",
     category: "bridal",
   },
   {
     id: "2",
-    src: "/gallery/gallery-2.jpg",
+    src: "/gallery/2.png",
     alt: "Sanggul pengantin classic",
     category: "sanggul",
   },
   {
     id: "3",
-    src: "/gallery/gallery-3.jpg",
+    src: "/gallery/3.png",
     alt: "Makeup pengantin natural",
     category: "bridal",
   },
   {
     id: "4",
-    src: "/gallery/gallery-4.jpg",
+    src: "/gallery/4.png",
     alt: "Dekorasi pengantin",
     category: "dekorasi",
   },
   {
     id: "5",
-    src: "/gallery/gallery-5.jpg",
+    src: "/gallery/5.png",
     alt: "Pengantin adat",
     category: "bridal",
   },
   {
     id: "6",
-    src: "/gallery/gallery-6.jpg",
+    src: "/gallery/6.png",
     alt: "Rias pengantin premium",
     category: "bridal",
+  },
+  {
+    id: "7",
+    src: "/gallery/7.png",
+    alt: "Makeup pengantin modern",
+    category: "bridal",
+  },
+  {
+    id: "8",
+    src: "/gallery/8.png",
+    alt: "Sanggul pengantin tradisional",
+    category: "sanggul",
   },
 ];
 
@@ -147,21 +159,21 @@ export const services = [
   {
     title: "Rias Pengantin",
     description: "Rias wajah pengantin dengan teknik flawless dan tahan lama.",
-    icon: "💄",
+    icon: "makeup",
   },
   {
     title: "Sanggul Custom",
     description: "Sanggul tradisional hingga modern sesuai keinginan.",
-    icon: "💇‍♀️",
+    icon: "sanggul",
   },
   {
     title: "Trial Makeup",
     description: "Sesi percobaan rias sebelum hari H.",
-    icon: "✨",
+    icon: "trial",
   },
   {
     title: "Rias Ibu & Bridesmaid",
     description: "Layanan rias untuk ibu dan pendamping pengantin.",
-    icon: "👗",
+    icon: "bridesmaid",
   },
 ];
