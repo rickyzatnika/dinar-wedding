@@ -59,7 +59,7 @@ const testimonials = [
     role: "Pengantin",
     avatar: "/images/testimonial-1.jpg",
     message:
-      "Makepnya flawless banget! Dinnar Wedding bikin aku pede di hari pernikahan. Hasilnya natural dan tahan seharian.",
+      "Makepnya flawless banget! Dinar Wedding bikin aku pede di hari pernikahan. Hasilnya natural dan tahan seharian.",
     rating: 5,
   },
   {

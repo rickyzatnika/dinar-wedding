@@ -4,7 +4,7 @@ import { FAQ } from "@/components/sections/FAQ";
 import { CTA } from "@/components/sections/CTA";
 
 export const metadata: Metadata = {
-  title: "Paket | Dinnar Wedding",
+  title: "Paket | Dinar Wedding",
   description: "Pilih paket rias pengantin sesuai kebutuhan Anda.",
 };
 

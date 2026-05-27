@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "Booking | Dinnar Wedding",
-  description: "Booking jasa makeup pengantin Dinnar Wedding.",
+  title: "Booking | Dinar Wedding",
+  description: "Booking jasa makeup pengantin Dinar Wedding.",
 };
 
 export default function BookingPage() {

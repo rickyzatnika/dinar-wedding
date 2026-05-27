@@ -87,7 +87,7 @@ export default function AdminLoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-[#F3E7DD]">
       <div className="w-full max-w-sm bg-white rounded-2xl shadow-lg p-8">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-[#3B2A24]">Dinnar Wedding</h1>
+          <h1 className="text-2xl font-bold text-[#3B2A24]">Dinar Wedding</h1>
           <p className="text-sm text-gray-500 mt-1">Admin Dashboard</p>
         </div>
 

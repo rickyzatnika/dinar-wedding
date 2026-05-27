@@ -2,7 +2,7 @@ import type { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "dinnar123";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "dinar123";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -24,7 +24,7 @@ export const authOptions: AuthOptions = {
           return {
             id: "1",
             name: ADMIN_USERNAME,
-            email: `${ADMIN_USERNAME}@dinnar-wedding.com`,
+            email: `${ADMIN_USERNAME}@dinarwedding.com`,
           };
         }
 

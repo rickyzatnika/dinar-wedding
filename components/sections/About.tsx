@@ -8,13 +8,13 @@ export function About() {
         <SectionTitle
           label="Tentang Kami"
           title="Dedikasi untuk Kecantikan Anda"
-          subtitle="Dinnar Wedding hadir untuk mewujudkan rias pengantin impian Anda dengan sentuhan profesional dan penuh kasih."
+          subtitle="Dinar Wedding hadir untuk mewujudkan rias pengantin impian Anda dengan sentuhan profesional dan penuh kasih."
         />
         <div className="grid md:grid-cols-2 gap-16 items-center mt-8">
           <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
             <Image
               src="/gallery/3.png"
-              alt="Tentang Dinnar Wedding"
+              alt="Tentang Dinar Wedding"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"

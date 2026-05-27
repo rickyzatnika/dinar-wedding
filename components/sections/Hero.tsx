@@ -12,7 +12,7 @@ export function Hero() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-32">
         <div className="max-w-2xl">
           <span className="text-[#D8B07A] font-semibold tracking-[0.2em] text-sm uppercase">
-            Dinnar Wedding
+            Dinar Wedding
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-[1.1] mt-6">
             Mewujudkan

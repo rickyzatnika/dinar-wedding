@@ -29,7 +29,7 @@ export default function Sidebar() {
       <div className="p-4 border-b border-white/10 flex items-center justify-between">
         {!collapsed && (
           <div>
-            <h2 className="font-semibold text-sm">Dinnar Wedding</h2>
+            <h2 className="font-semibold text-sm">Dinar Wedding</h2>
             <p className="text-[10px] text-white/60">Admin Panel</p>
           </div>
         )}
