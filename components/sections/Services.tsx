@@ -11,7 +11,7 @@ export function Services() {
         <SectionTitle
           label="Layanan"
           title="Layanan Profesional Kami"
-          subtitle="Berbagai layanan rias untuk membuat hari spesial Anda sempurna."
+          subtitle="Berbagai layanan rias & dekorasi untuk membuat hari spesial Anda sempurna."
         />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, i) => (

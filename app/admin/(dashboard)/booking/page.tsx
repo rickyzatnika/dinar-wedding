@@ -116,9 +116,9 @@ export default function AdminBookingPage() {
 
   return (
     <div className="p-6">
-      <div className="flex items-center justify-between mb-6">
+      <div className="sticky top-0 z-20 bg-gray-50 pb-4 flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-[#3B2A24]">Booking</h1>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
           {selected.size > 0 && (
             <button onClick={handleBulkDelete} className="px-3 py-1.5 bg-red-500 text-white rounded-lg text-xs font-medium hover:bg-red-600">
               Hapus ({selected.size})

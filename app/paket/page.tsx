@@ -5,7 +5,7 @@ import { CTA } from "@/components/sections/CTA";
 
 export const metadata: Metadata = {
   title: "Paket | Dinar Wedding",
-  description: "Pilih paket rias pengantin sesuai kebutuhan Anda.",
+  description: "Pilih paket rias & dekorasi pengantin sesuai kebutuhan Anda.",
 };
 
 export default function PaketPage() {
@@ -20,7 +20,7 @@ export default function PaketPage() {
             Paket Layanan
           </h1>
           <p className="text-gray-600 mt-4 max-w-xl mx-auto">
-            Pilih paket rias yang sesuai dengan kebutuhan dan budget Anda.
+            Pilih paket rias & dekorasi yang sesuai dengan kebutuhan dan budget Anda.
           </p>
         </div>
       </div>

@@ -9,10 +9,8 @@ const menu = [
   { label: "Dashboard", href: "/admin/dashboard", icon: "📊" },
   { label: "Booking", href: "/admin/booking", icon: "📅" },
   { label: "Paket", href: "/admin/packages", icon: "💎" },
-  { label: "Testimoni", href: "/admin/testimonials", icon: "⭐" },
   { label: "Galeri", href: "/admin/gallery", icon: "🖼️" },
   { label: "FAQ", href: "/admin/faq", icon: "❓" },
-  { label: "Chat History", href: "/admin/chat", icon: "💬" },
 ];
 
 export default function Sidebar() {

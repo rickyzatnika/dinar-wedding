@@ -17,14 +17,14 @@ export function Hero() {
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-[1.1] mt-6">
             Mewujudkan
             <br />
-            <span className="text-[#D8B07A]">Rias Pengantin</span>
+            <span className="text-[#D8B07A]">Rias & Dekorasi</span>
             <br />
-            Elegan & Berkesan
+            Pengantin Elegan
           </h1>
           <p className="text-white/70 text-lg leading-relaxed max-w-xl mt-6">
-            Jasa makeup pengantin profesional untuk hari spesial Anda. Kami
-            menghadirkan riasan elegan yang membuat Anda percaya diri di
-            momen terindah.
+            Jasa makeup & dekorasi pengantin profesional untuk hari spesial Anda. Kami
+            menghadirkan riasan dan dekorasi elegan yang membuat hari pernikahan
+            Anda sempurna.
           </p>
           <div className="flex flex-wrap gap-4 mt-10">
             <Button

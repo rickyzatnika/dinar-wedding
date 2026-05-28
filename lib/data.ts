@@ -5,7 +5,7 @@ export const packages: Package[] = [
     id: "basic",
     name: "Basic",
     price: 2500000,
-    description: "Paket rias pengantin dasar untuk acara intimate.",
+    description: "Paket rias & dekorasi dasar untuk acara intimate.",
     features: [
       "Rias wajah pengantin",
       "Sanggul classic",
@@ -17,7 +17,7 @@ export const packages: Package[] = [
     id: "premium",
     name: "Premium",
     price: 5000000,
-    description: "Paket rias pengantin lengkap dengan busana.",
+    description: "Paket rias & dekorasi lengkap dengan busana.",
     isPopular: true,
     features: [
       "Rias wajah pengantin",
@@ -32,7 +32,7 @@ export const packages: Package[] = [
     id: "exclusive",
     name: "Exclusive",
     price: 10000000,
-    description: "Paket VIP dengan layanan eksklusif dan lengkap.",
+    description: "Paket VIP rias & dekorasi dengan layanan eksklusif.",
     features: [
       "Rias wajah pengantin",
       "Sanggul premium",
@@ -53,7 +53,7 @@ export const testimonials: Testimonial[] = [
     role: "Pengantin",
     avatar: "/images/testimonial-1.jpg",
     message:
-      "Makepnya flawless banget! Dinar Wedding bikin aku pede di hari pernikahan. Hasilnya natural dan tahan seharian.",
+      "Makep & dekorasinya flawless banget! Dinar Wedding bikin aku pede di hari pernikahan. Hasilnya natural dan tahan seharian.",
     rating: 5,
   },
   {
@@ -62,7 +62,7 @@ export const testimonials: Testimonial[] = [
     role: "Ibu Pengantin",
     avatar: "/images/testimonial-2.jpg",
     message:
-      "Pelayanan ramah dan profesional. Hasil riasannya elegant banget, cocok banget sama tema pernikahan.",
+      "Pelayanan ramah dan profesional. Hasil riasan dan dekorasinya elegant banget, cocok banget sama tema pernikahan.",
     rating: 5,
   },
   {
@@ -71,60 +71,39 @@ export const testimonials: Testimonial[] = [
     role: "Pengantin",
     avatar: "/images/testimonial-3.jpg",
     message:
-      "Mulai dari trial sampe hari H, semua lancar. Timnya tepat waktu dan bikin riasan yang tahan lama.",
+      "Mulai dari trial sampe hari H, semua lancar. Timnya tepat waktu dan bikin riasan & dekorasi yang sempurna.",
     rating: 5,
   },
 ];
 
 export const galleryImages: GalleryImage[] = [
-  {
-    id: "1",
-    src: "/gallery/1.png",
-    alt: "Rias pengantin elegan",
-    category: "bridal",
-  },
-  {
-    id: "2",
-    src: "/gallery/2.png",
-    alt: "Sanggul pengantin classic",
-    category: "sanggul",
-  },
-  {
-    id: "3",
-    src: "/gallery/3.png",
-    alt: "Makeup pengantin natural",
-    category: "bridal",
-  },
-  {
-    id: "4",
-    src: "/gallery/4.png",
-    alt: "Dekorasi pengantin",
-    category: "dekorasi",
-  },
-  {
-    id: "5",
-    src: "/gallery/5.png",
-    alt: "Pengantin adat",
-    category: "bridal",
-  },
-  {
-    id: "6",
-    src: "/gallery/6.png",
-    alt: "Rias pengantin premium",
-    category: "bridal",
-  },
-  {
-    id: "7",
-    src: "/gallery/7.png",
-    alt: "Makeup pengantin modern",
-    category: "bridal",
-  },
-  {
-    id: "8",
-    src: "/gallery/8.png",
-    alt: "Sanggul pengantin tradisional",
-    category: "sanggul",
-  },
+  // MakeUp
+  { id: "mu-1", src: "/gallery/MakeUp/1.png", alt: "Rias pengantin natural", category: "makeup" },
+  { id: "mu-2", src: "/gallery/MakeUp/2.png", alt: "Makeup pengantin elegan", category: "makeup" },
+  { id: "mu-3", src: "/gallery/MakeUp/3.png", alt: "Rias pengantin classic", category: "makeup" },
+  { id: "mu-4", src: "/gallery/MakeUp/4.png", alt: "Makeup pengantin modern", category: "makeup" },
+  { id: "mu-5", src: "/gallery/MakeUp/5.png", alt: "Rias pengantin glowing", category: "makeup" },
+  { id: "mu-6", src: "/gallery/MakeUp/6.png", alt: "Makeup pengantin soft", category: "makeup" },
+  { id: "mu-7", src: "/gallery/MakeUp/7.jpg", alt: "Rias pengantin premium", category: "makeup" },
+  { id: "mu-8", src: "/gallery/MakeUp/8.png", alt: "Makeup pengantin tradisional", category: "makeup" },
+  // Akad
+  { id: "ak-1", src: "/gallery/Akad/001.jpg", alt: "Proses akad nikah", category: "akad" },
+  { id: "ak-2", src: "/gallery/Akad/002.jpg", alt: "Momen akad sakral", category: "akad" },
+  { id: "ak-3", src: "/gallery/Akad/003.jpg", alt: "Pengantin saat akad", category: "akad" },
+  { id: "ak-4", src: "/gallery/Akad/004.jpg", alt: "Sesi akad penuh haru", category: "akad" },
+  { id: "ak-5", src: "/gallery/Akad/005.jpg", alt: "Prosesi ijab kabul", category: "akad" },
+  { id: "ak-7", src: "/gallery/Akad/007.jpg", alt: "Momen akad bahagia", category: "akad" },
+  { id: "ak-8", src: "/gallery/Akad/008.jpg", alt: "Akad nikah khidmat", category: "akad" },
+  { id: "ak-9", src: "/gallery/Akad/009.jpg", alt: "Pengantin saat akad", category: "akad" },
+  // Dekorasi
+  { id: "dek-1", src: "/gallery/Dekorasi/011.jpg", alt: "Dekorasi pelaminan", category: "dekorasi" },
+  { id: "dek-2", src: "/gallery/Dekorasi/012.jpg", alt: "Hiasan dekorasi mewah", category: "dekorasi" },
+  { id: "dek-3", src: "/gallery/Dekorasi/013.jpg", alt: "Dekorasi panggung", category: "dekorasi" },
+  { id: "dek-4", src: "/gallery/Dekorasi/014.jpg", alt: "Dekorasi pengantin", category: "dekorasi" },
+  { id: "dek-5", src: "/gallery/Dekorasi/015.jpg", alt: "Dekorasi pelaminan classic", category: "dekorasi" },
+  { id: "dek-6", src: "/gallery/Dekorasi/016.jpg", alt: "Dekorasi bunga indah", category: "dekorasi" },
+  { id: "dek-7", src: "/gallery/Dekorasi/017.jpg", alt: "Dekorasi resepsi", category: "dekorasi" },
+  { id: "dek-8", src: "/gallery/Dekorasi/018.jpg", alt: "Dekorasi pernikahan", category: "dekorasi" },
 ];
 
 export const faqItems = [
@@ -144,14 +123,19 @@ export const faqItems = [
       "Proses rias pengantin biasanya memakan waktu 2-3 jam, tergantung kompleksitas riasan dan sanggul.",
   },
   {
-    question: "Apakah melayani luar kota?",
+    question: "Apakah menyediakan dekorasi sendiri?",
     answer:
-      "Ya, kami melayani rias luar kota dengan tambahan biaya transportasi dan akomodasi.",
+      "Ya, kami memiliki tim dekorasi profesional yang siap mewujudkan dekorasi impian Anda, mulai dari pelaminan hingga venue resepsi.",
   },
   {
-    question: "Bisakah request model riasan tertentu?",
+    question: "Apakah melayani luar kota?",
     answer:
-      "Tentu! Kami akan diskusikan saat konsultasi dan trial untuk mendapatkan hasil yang sesuai dengan keinginan Anda.",
+      "Ya, kami melayani rias & dekorasi luar kota dengan tambahan biaya transportasi dan akomodasi.",
+  },
+  {
+    question: "Bisakah request model riasan atau tema dekorasi tertentu?",
+    answer:
+      "Tentu! Kami akan diskusikan saat konsultasi untuk mendapatkan hasil riasan dan dekorasi yang sesuai dengan keinginan Anda.",
   },
 ];
 
@@ -175,5 +159,15 @@ export const services = [
     title: "Rias Ibu & Bridesmaid",
     description: "Layanan rias untuk ibu dan pendamping pengantin.",
     icon: "bridesmaid",
+  },
+  {
+    title: "Dekorasi Pelaminan",
+    description: "Dekorasi pelaminan elegan sesuai tema pernikahan Anda.",
+    icon: "dekorasi",
+  },
+  {
+    title: "Dekorasi Resepsi",
+    description: "Dekorasi venue resepsi yang mewah dan berkesan.",
+    icon: "dekorasi",
   },
 ];

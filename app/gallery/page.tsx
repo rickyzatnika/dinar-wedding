@@ -4,7 +4,7 @@ import { CTA } from "@/components/sections/CTA";
 
 export const metadata: Metadata = {
   title: "Galeri | Dinar Wedding",
-  description: "Lihat hasil riasan pengantin terbaik dari Dinar Wedding.",
+  description: "Lihat hasil riasan & dekorasi pengantin terbaik dari Dinar Wedding.",
 };
 
 export default function GalleryPage() {
@@ -19,7 +19,7 @@ export default function GalleryPage() {
             Galeri Kami
           </h1>
           <p className="text-gray-600 mt-4 max-w-xl mx-auto">
-            Kumpulan karya riasan pengantin terbaik dari tim Dinar Wedding.
+            Kumpulan karya riasan & dekorasi pengantin terbaik dari tim Dinar Wedding.
           </p>
         </div>
       </div>

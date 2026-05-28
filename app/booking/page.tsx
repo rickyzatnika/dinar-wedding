@@ -5,7 +5,7 @@ import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Booking | Dinar Wedding",
-  description: "Booking jasa makeup pengantin Dinar Wedding.",
+  description: "Booking jasa makeup & dekorasi pengantin Dinar Wedding.",
 };
 
 export default function BookingPage() {

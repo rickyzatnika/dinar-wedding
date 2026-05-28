@@ -5,16 +5,18 @@ export function Trust() {
   ];
 
   return (
-    <section className="py-16 bg-[#F3E7DD]/20">
+    <section className="py-16 bg-[#F3E7DD]/20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-center text-gray-400 text-sm font-medium tracking-[0.15em] uppercase mb-10">
           Dipercaya oleh
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-16 gap-y-6">
-          {brands.map((brand) => (
+      </div>
+      <div className="relative w-full">
+        <div className="flex marquee-track gap-16">
+          {[...brands, ...brands].map((brand, i) => (
             <div
-              key={brand}
-              className="text-gray-300 font-serif text-xl italic tracking-wide"
+              key={`${brand}-${i}`}
+              className="text-gray-300 font-serif text-xl italic tracking-wide whitespace-nowrap shrink-0"
             >
               {brand}
             </div>

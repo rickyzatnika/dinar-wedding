@@ -32,6 +32,15 @@ export function ServiceIcon({ name }: ServiceIconProps) {
           <path d="M12 6l-2 4-4-2" stroke="#D8B07A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       );
+    case "dekorasi":
+      return (
+        <svg className="w-10 h-10 text-[#C97B7B]" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="18" width="28" height="16" rx="2" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M12 18V12a8 8 0 0116 0v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M20 22v6M17 28h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <circle cx="20" cy="28" r="2" fill="#D8B07A" />
+        </svg>
+      );
     case "bridesmaid":
       return (
         <svg className="w-10 h-10 text-[#C97B7B]" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">

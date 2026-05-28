@@ -7,20 +7,16 @@ import { galleryImages } from "@/lib/data";
 import { FadeUp } from "@/components/animation/FadeUp";
 
 const categories = [
-  { value: "all", label: "Semua" },
-  { value: "bridal", label: "Bridal" },
-  { value: "sanggul", label: "Sanggul" },
+  { value: "makeup", label: "Makeup" },
+  { value: "akad", label: "Akad" },
   { value: "dekorasi", label: "Dekorasi" },
 ];
 
 export function Gallery() {
-  const [active, setActive] = useState("all");
+  const [active, setActive] = useState("makeup");
   const [selected, setSelected] = useState<string | null>(null);
 
-  const filtered =
-    active === "all"
-      ? galleryImages
-      : galleryImages.filter((img) => img.category === active);
+  const filtered = galleryImages.filter((img) => img.category === active);
 
   return (
     <section id="galeri" className="py-24 bg-white">
@@ -28,7 +24,7 @@ export function Gallery() {
         <SectionTitle
           label="Galeri"
           title="Karya Terbaik Kami"
-          subtitle="Lihat hasil riasan pengantin yang telah kami kerjakan."
+          subtitle="Lihat hasil riasan & dekorasi pengantin yang telah kami kerjakan."
         />
         <div className="flex justify-center gap-4 mb-12 flex-wrap">
           {categories.map((cat) => (

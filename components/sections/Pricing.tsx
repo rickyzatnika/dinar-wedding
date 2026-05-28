@@ -12,7 +12,7 @@ export function Pricing() {
         <SectionTitle
           label="Paket"
           title="Pilih Paket Sesuai Kebutuhan"
-          subtitle="Kami menawarkan berbagai paket rias pengantin yang bisa disesuaikan."
+          subtitle="Kami menawarkan berbagai paket rias & dekorasi yang bisa disesuaikan."
         />
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {packages.map((pkg, i) => (
