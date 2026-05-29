@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { waUrl } from "@/lib/utils";
 
@@ -9,6 +10,16 @@ export function Hero() {
         style={{ backgroundImage: "url(/images/hero.png)" }}
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+      <div className="absolute -bottom-10 -right-10 w-72 md:w-96 opacity-30 pointer-events-none">
+        <Image
+          src="/images/ornamen-big.webp"
+          alt=""
+          width={384}
+          height={384}
+          className="w-full h-auto"
+          priority={false}
+        />
+      </div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-32">
         <div className="max-w-2xl">
           <span className="text-[#D8B07A] font-semibold tracking-[0.2em] text-sm uppercase">

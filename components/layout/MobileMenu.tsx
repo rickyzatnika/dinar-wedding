@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { navLinks } from "@/constants/navigation";
 import { waUrl } from "@/lib/utils";
 
@@ -22,7 +23,16 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex justify-end p-6">
+        <div className="flex items-center justify-between p-6">
+          <div className="relative h-10 w-[90px]">
+            <Image
+              src="/logo-dinar-wedding.png"
+              alt="Dinar Wedding"
+              fill
+              className="object-contain object-left"
+              priority
+            />
+          </div>
           <button
             onClick={onClose}
             className="text-[#3B2A24] hover:text-[#C97B7B] transition-colors"

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import { navLinks } from "@/constants/navigation";
 import { socials } from "@/constants/socials";
@@ -9,7 +10,14 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-1">
-            <h3 className="text-2xl font-bold mb-4 tracking-tight">{siteConfig.name}</h3>
+            <div className="relative h-14 w-[126px] mb-4 brightness-0 invert">
+              <Image
+                src="/logo-dinar-wedding.png"
+                alt="Dinar Wedding"
+                fill
+                className="object-contain object-left"
+              />
+            </div>
             <p className="text-white/60 leading-relaxed text-sm">
               {siteConfig.tagline}
             </p>

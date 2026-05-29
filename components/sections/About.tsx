@@ -3,7 +3,16 @@ import { SectionTitle } from "@/components/ui/SectionTitle";
 
 export function About() {
   return (
-    <section id="tentang" className="py-24 bg-white">
+    <section id="tentang" className="py-24 bg-white relative">
+      <div className="absolute -left-10 top-1/2 -translate-y-1/2 w-48 opacity-10 pointer-events-none hidden md:block">
+        <Image
+          src="/images/ornamen-small.webp"
+          alt=""
+          width={192}
+          height={192}
+          className="w-full h-auto"
+        />
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
           label="Tentang Kami"

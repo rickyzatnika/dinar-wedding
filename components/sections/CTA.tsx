@@ -1,9 +1,19 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { waUrl } from "@/lib/utils";
 
 export function CTA() {
   return (
-    <section className="py-24 bg-gradient-to-r from-[#3B2A24] to-[#4a352e]">
+    <section className="py-24 bg-gradient-to-r from-[#3B2A24] to-[#4a352e] relative overflow-hidden">
+      <div className="absolute -right-10 -bottom-10 w-56 opacity-20 pointer-events-none">
+        <Image
+          src="/images/ornamen-small.webp"
+          alt=""
+          width={224}
+          height={224}
+          className="w-full h-auto"
+        />
+      </div>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
           Siap Mewujudkan Pernikahan Impian Anda?
