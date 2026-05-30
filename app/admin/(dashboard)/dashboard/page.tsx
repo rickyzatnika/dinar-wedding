@@ -122,12 +122,11 @@ export default async function AdminDashboardPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
         {stats.map((s) => (
-          <div key={s.label} className="relative overflow-hidden rounded-2xl bg-gradient-to-br shadow-lg transition-transform hover:-translate-y-0.5">
-            <div className={`absolute inset-0 ${s.bg} opacity-90`} />
+          <div key={s.label} className={`relative overflow-hidden rounded-2xl bg-gradient-to-br shadow-lg transition-transform hover:-translate-y-0.5 ${s.bg}`}>
             <div className="relative p-5 text-white">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-white/80 text-sm font-medium">{s.label}</span>
-                <span className="text-white/60">{s.icon}</span>
+                <span className="text-white/90 text-sm font-medium">{s.label}</span>
+                <span className="text-white/70">{s.icon}</span>
               </div>
               <p className="text-3xl font-bold tracking-tight">{s.value}</p>
               <div className="mt-2 h-1 w-full bg-white/20 rounded-full overflow-hidden">
