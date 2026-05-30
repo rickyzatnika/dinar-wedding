@@ -9,10 +9,12 @@ interface Package {
   price: number;
   description: string;
   features: string[];
+  categories?: { name: string; items: string[] }[];
   isPopular?: boolean;
+  isActive?: boolean;
 }
 
-const emptyForm = { name: "", price: 0, description: "", features: "", isPopular: false };
+const emptyForm = { name: "", price: 0, description: "", features: "", categories: "", isPopular: false, isActive: true };
 
 export default function AdminPackagesPage() {
   const [packages, setPackages] = useState<Package[]>([]);
@@ -46,7 +48,9 @@ export default function AdminPackagesPage() {
         price: addForm.price,
         description: addForm.description,
         features: addForm.features.split("\n").filter(Boolean),
+        categories: addForm.categories ? parseCategories(addForm.categories) : undefined,
         isPopular: addForm.isPopular,
+        isActive: addForm.isActive,
       }),
     });
     if (res.ok) {
@@ -54,6 +58,11 @@ export default function AdminPackagesPage() {
       setAddForm(emptyForm);
       fetchPackages();
     }
+  }
+
+  function parseCategories(raw: string): { name: string; items: string[] }[] {
+    try { return JSON.parse(raw); }
+    catch { return []; }
   }
 
   async function handleEdit(e: React.FormEvent) {
@@ -123,10 +132,17 @@ export default function AdminPackagesPage() {
           <input type="number" value={addForm.price} onChange={(e) => setAddForm({ ...addForm, price: Number(e.target.value) })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" required placeholder="Harga" />
           <textarea value={addForm.description} onChange={(e) => setAddForm({ ...addForm, description: e.target.value })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" rows={3} placeholder="Deskripsi" />
           <textarea value={addForm.features} onChange={(e) => setAddForm({ ...addForm, features: e.target.value })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" rows={4} placeholder="Fitur (pisahkan dengan baris baru)" />
-          <label className="flex items-center gap-2">
-            <input type="checkbox" checked={addForm.isPopular} onChange={(e) => setAddForm({ ...addForm, isPopular: e.target.checked })} className="rounded" />
-            <span className="text-sm text-gray-700">Populer</span>
-          </label>
+          <textarea value={addForm.categories} onChange={(e) => setAddForm({ ...addForm, categories: e.target.value })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" rows={3} placeholder='Kategori (JSON, contoh: [{"name":"Dekorasi","items":["item1","item2"]}])' />
+          <div className="flex gap-4">
+            <label className="flex items-center gap-2">
+              <input type="checkbox" checked={addForm.isPopular} onChange={(e) => setAddForm({ ...addForm, isPopular: e.target.checked })} className="rounded" />
+              <span className="text-sm text-gray-700">Populer</span>
+            </label>
+            <label className="flex items-center gap-2">
+              <input type="checkbox" checked={addForm.isActive} onChange={(e) => setAddForm({ ...addForm, isActive: e.target.checked })} className="rounded" />
+              <span className="text-sm text-gray-700">Aktif</span>
+            </label>
+          </div>
           <div className="flex gap-3 pt-2">
             <button type="submit" className="px-4 py-2 bg-[#C97B7B] text-white rounded-lg text-sm font-medium">Simpan</button>
             <button type="button" onClick={() => { setAddModal(false); setAddForm(emptyForm); }} className="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm">Batal</button>
@@ -140,10 +156,18 @@ export default function AdminPackagesPage() {
             <input type="text" value={editData.name} onChange={(e) => setEditData({ ...editData, name: e.target.value })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" required placeholder="Nama Paket" />
             <input type="number" value={editData.price} onChange={(e) => setEditData({ ...editData, price: Number(e.target.value) })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" required placeholder="Harga" />
             <textarea value={editData.description} onChange={(e) => setEditData({ ...editData, description: e.target.value })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" rows={3} placeholder="Deskripsi" />
-            <label className="flex items-center gap-2">
-              <input type="checkbox" checked={editData.isPopular} onChange={(e) => setEditData({ ...editData, isPopular: e.target.checked })} className="rounded" />
-              <span className="text-sm text-gray-700">Populer</span>
-            </label>
+            <textarea value={editData.features?.join("\n") || ""} onChange={(e) => setEditData({ ...editData, features: e.target.value.split("\n") })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" rows={4} placeholder="Fitur (pisahkan dengan baris baru)" />
+            <textarea value={editData.categories ? JSON.stringify(editData.categories, null, 2) : ""} onChange={(e) => { try { setEditData({ ...editData, categories: JSON.parse(e.target.value) }); } catch { /* invalid JSON */ } }} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm font-mono" rows={3} placeholder='Kategori (JSON)' />
+            <div className="flex gap-4">
+              <label className="flex items-center gap-2">
+                <input type="checkbox" checked={editData.isPopular} onChange={(e) => setEditData({ ...editData, isPopular: e.target.checked })} className="rounded" />
+                <span className="text-sm text-gray-700">Populer</span>
+              </label>
+              <label className="flex items-center gap-2">
+                <input type="checkbox" checked={editData.isActive ?? true} onChange={(e) => setEditData({ ...editData, isActive: e.target.checked })} className="rounded" />
+                <span className="text-sm text-gray-700">Aktif</span>
+              </label>
+            </div>
             <div className="flex gap-3 pt-2">
               <button type="submit" className="px-4 py-2 bg-[#C97B7B] text-white rounded-lg text-sm font-medium">Simpan</button>
               <button type="button" onClick={() => setEditModal(false)} className="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm">Batal</button>
