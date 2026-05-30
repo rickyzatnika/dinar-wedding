@@ -28,6 +28,7 @@ export function Navbar() {
                 src="/logo-dinar-wedding.png"
                 alt="Dinar Wedding"
                 fill
+                sizes="108px"
                 className="object-contain object-left"
                 priority
               />

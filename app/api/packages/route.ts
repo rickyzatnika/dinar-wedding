@@ -26,6 +26,7 @@ export async function POST(request: Request) {
       price: body.price,
       description: body.description || "",
       features: body.features || body.description?.split("\n").filter(Boolean) || [],
+      categories: body.categories || [],
       isPopular: body.isPopular || false,
       isActive: true,
     });

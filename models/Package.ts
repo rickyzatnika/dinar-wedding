@@ -1,11 +1,17 @@
 import mongoose, { Schema, Document } from "mongoose";
 
+export interface IPackageCategory {
+  name: string;
+  items: string[];
+}
+
 export interface IPackage extends Document {
   id: string;
   name: string;
   price: number;
   description: string;
   features: string[];
+  categories?: IPackageCategory[];
   isPopular?: boolean;
   isActive: boolean;
   createdAt: Date;
@@ -34,6 +40,10 @@ const packageSchema = new Schema<IPackage>({
     type: [String],
     required: true,
   },
+  categories: [{
+    name: { type: String, required: true },
+    items: { type: [String], required: true },
+  }],
   isPopular: {
     type: Boolean,
     default: false,

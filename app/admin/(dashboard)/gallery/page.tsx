@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import Modal from "@/components/admin/Modal";
 
@@ -11,16 +12,22 @@ interface GalleryItem {
   category: string;
 }
 
+const PER_PAGE = 12;
+
 export default function AdminGalleryPage() {
   const [items, setItems] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const loaderRef = useRef<HTMLDivElement>(null);
 
   const [editModal, setEditModal] = useState(false);
   const [editData, setEditData] = useState<GalleryItem | null>(null);
 
   const [deleteModal, setDeleteModal] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
+  const [lightbox, setLightbox] = useState<GalleryItem | null>(null);
 
   useEffect(() => {
     fetchGallery();
@@ -30,13 +37,31 @@ export default function AdminGalleryPage() {
     setLoading(true);
     try {
       const res = await fetch("/api/gallery");
-      setItems(await res.json());
+      const data = await res.json();
+      setItems(data);
+      setHasMore(data.length > PER_PAGE);
     } catch {
       console.error("Failed");
     } finally {
       setLoading(false);
     }
   }
+
+  const displayedItems = items.slice(0, page * PER_PAGE);
+
+  useEffect(() => {
+    if (!loaderRef.current || !hasMore) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setPage((p) => p + 1);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(loaderRef.current);
+    return () => observer.disconnect();
+  }, [hasMore]);
 
   async function handleEdit(e: React.FormEvent) {
     e.preventDefault();
@@ -103,32 +128,63 @@ export default function AdminGalleryPage() {
         </div>
       </div>
 
-      {loading && <p className="text-gray-400 text-center py-8">Memuat...</p>}
-      {!loading && items.length === 0 && <p className="text-gray-400 text-center py-8">Belum ada gambar</p>}
+      {loading && (
+        <div className="flex items-center justify-center py-12">
+          <div className="flex items-center gap-2 text-gray-400">
+            <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+            <span className="text-sm">Memuat gambar...</span>
+          </div>
+        </div>
+      )}
+      {!loading && items.length === 0 && <p className="text-gray-400 text-center py-12 text-sm">Belum ada gambar</p>}
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-        {items.map((item) => (
-          <div key={item._id} className="group relative bg-white rounded-xl shadow-sm overflow-hidden">
+        {displayedItems.map((item) => (
+          <div key={item._id} className="group relative bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
             <div className="absolute top-2 left-2 z-10">
-              <input type="checkbox" checked={selected.has(item._id)} onChange={() => toggleSelect(item._id)} className="rounded" />
+              <input type="checkbox" checked={selected.has(item._id)} onChange={() => toggleSelect(item._id)} className="rounded accent-rose-500" />
             </div>
-            <div className="aspect-square bg-gray-100 flex items-center justify-center text-gray-400 text-xs p-2 break-all">
+            <button className="relative aspect-square bg-gray-100 overflow-hidden w-full" onClick={() => setLightbox(item)}>
               {item.src ? (
-                <img src={item.src} alt={item.alt} className="w-full h-full object-cover"
-                  onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; (e.target as HTMLImageElement).parentElement!.innerText = "Invalid URL"; }} />
-              ) : "No Image"}
-            </div>
-            <div className="p-2">
-              <p className="text-xs font-medium text-[#3B2A24] truncate">{item.alt}</p>
-              <p className="text-[10px] text-gray-400">{item.category}</p>
+                <Image
+                  src={item.src}
+                  alt={item.alt || "Gallery image"}
+                  fill
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                  className="object-cover cursor-pointer hover:scale-105 transition-transform duration-200"
+                  unoptimized
+                  loading={displayedItems.indexOf(item) < 4 ? "eager" : "lazy"}
+                />
+              ) : (
+                <div className="flex items-center justify-center h-full text-gray-400 text-xs">No Image</div>
+              )}
+            </button>
+            <div className="p-2.5">
+              <p className="text-xs font-medium text-gray-900 truncate">{item.alt || "Tanpa judul"}</p>
+              <p className="text-[10px] text-gray-400 capitalize">{item.category}</p>
             </div>
             <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-              <button onClick={() => { setEditData(item); setEditModal(true); }} className="bg-white/80 rounded-full w-6 h-6 flex items-center justify-center text-xs text-gray-600 hover:bg-white">Edit</button>
-              <button onClick={() => { setDeleteTarget(item._id); setDeleteModal(true); }} className="bg-white/80 rounded-full w-6 h-6 flex items-center justify-center text-xs text-red-500 hover:bg-white">✕</button>
+              <button onClick={() => { setEditData(item); setEditModal(true); }} className="bg-white/90 backdrop-blur rounded-full w-7 h-7 flex items-center justify-center text-xs text-gray-600 hover:bg-white shadow-sm">Edit</button>
+              <button onClick={() => { setDeleteTarget(item._id); setDeleteModal(true); }} className="bg-white/90 backdrop-blur rounded-full w-7 h-7 flex items-center justify-center text-xs text-red-500 hover:bg-white shadow-sm">✕</button>
             </div>
           </div>
         ))}
       </div>
+
+      {hasMore && displayedItems.length < items.length && (
+        <div ref={loaderRef} className="flex justify-center py-6">
+          <div className="flex items-center gap-2 text-gray-400">
+            <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+            <span className="text-xs">Memuat lainnya...</span>
+          </div>
+        </div>
+      )}
 
       <Modal open={editModal} onClose={() => setEditModal(false)} title="Edit Gambar">
         {editData && (
@@ -157,6 +213,29 @@ export default function AdminGalleryPage() {
           <button onClick={() => setDeleteModal(false)} className="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm">Batal</button>
         </div>
       </Modal>
+
+      {lightbox && (
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onClick={() => setLightbox(null)}>
+          <div className="relative max-w-5xl w-full max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setLightbox(null)} className="absolute -top-10 right-0 text-white/80 hover:text-white text-sm font-medium">
+              Tutup ✕
+            </button>
+            <div className="text-center">
+              <Image
+                src={lightbox.src.replace("/upload/", "/upload/w_800,q_auto/")}
+                alt={lightbox.alt || "Gallery"}
+                width={800}
+                height={600}
+                className="max-w-full max-h-[60vh] w-auto h-auto mx-auto rounded-lg shadow-2xl"
+                unoptimized
+              />
+            </div>
+            <div className="text-center mt-3 text-white/80 text-sm">
+              {lightbox.alt} <span className="text-white/40">—</span> <span className="capitalize">{lightbox.category}</span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

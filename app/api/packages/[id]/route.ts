@@ -16,6 +16,7 @@ export async function PATCH(
     if (body.price !== undefined) updateData.price = body.price;
     if (body.description !== undefined) updateData.description = body.description;
     if (body.features !== undefined) updateData.features = body.features;
+    if (body.categories !== undefined) updateData.categories = body.categories;
     if (body.isPopular !== undefined) updateData.isPopular = body.isPopular;
 
     const pkg = await Package.findByIdAndUpdate(id, updateData, { new: true });

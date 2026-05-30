@@ -15,6 +15,7 @@ export function Footer() {
                 src="/logo-dinar-wedding.png"
                 alt="Dinar Wedding"
                 fill
+                sizes="126px"
                 className="object-contain object-left"
               />
             </div>

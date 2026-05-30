@@ -11,14 +11,16 @@ export function Hero() {
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
       <div className="absolute -bottom-10 -right-10 w-72 md:w-96 opacity-30 pointer-events-none">
-        <Image
-          src="/images/ornamen-big.webp"
-          alt=""
-          width={384}
-          height={384}
-          className="w-full h-auto"
-          priority={false}
-        />
+        <div className="relative w-full aspect-square">
+          <Image
+            src="/images/ornamen-big.webp"
+            alt=""
+            fill
+            sizes="(max-width: 768px) 288px, 384px"
+            className="object-contain"
+            priority={false}
+          />
+        </div>
       </div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-32">
         <div className="max-w-2xl">

@@ -29,6 +29,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               src="/logo-dinar-wedding.png"
               alt="Dinar Wedding"
               fill
+              sizes="90px"
               className="object-contain object-left"
               priority
             />
