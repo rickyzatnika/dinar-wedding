@@ -642,34 +642,36 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
+const CLOUD_BASE = "https://res.cloudinary.com/inkara-id/image/upload";
+
 export const galleryImages: GalleryImage[] = [
   // MakeUp
-  { id: "mu-1", src: "/gallery/MakeUp/1.png", alt: "Rias pengantin natural", category: "makeup" },
-  { id: "mu-2", src: "/gallery/MakeUp/2.png", alt: "Makeup pengantin elegan", category: "makeup" },
-  { id: "mu-3", src: "/gallery/MakeUp/3.png", alt: "Rias pengantin classic", category: "makeup" },
-  { id: "mu-4", src: "/gallery/MakeUp/4.png", alt: "Makeup pengantin modern", category: "makeup" },
-  { id: "mu-5", src: "/gallery/MakeUp/5.png", alt: "Rias pengantin glowing", category: "makeup" },
-  { id: "mu-6", src: "/gallery/MakeUp/6.png", alt: "Makeup pengantin soft", category: "makeup" },
-  { id: "mu-7", src: "/gallery/MakeUp/7.jpg", alt: "Rias pengantin premium", category: "makeup" },
-  { id: "mu-8", src: "/gallery/MakeUp/8.png", alt: "Makeup pengantin tradisional", category: "makeup" },
+  { id: "mu-1", src: `${CLOUD_BASE}/dinar-wedding/gallery/MakeUp/1.png`, alt: "Rias pengantin natural", category: "makeup" },
+  { id: "mu-2", src: `${CLOUD_BASE}/dinar-wedding/gallery/MakeUp/2.png`, alt: "Makeup pengantin elegan", category: "makeup" },
+  { id: "mu-3", src: `${CLOUD_BASE}/dinar-wedding/gallery/MakeUp/3.png`, alt: "Rias pengantin classic", category: "makeup" },
+  { id: "mu-4", src: `${CLOUD_BASE}/dinar-wedding/gallery/MakeUp/4.png`, alt: "Makeup pengantin modern", category: "makeup" },
+  { id: "mu-5", src: `${CLOUD_BASE}/dinar-wedding/gallery/MakeUp/5.png`, alt: "Rias pengantin glowing", category: "makeup" },
+  { id: "mu-6", src: `${CLOUD_BASE}/dinar-wedding/gallery/MakeUp/6.png`, alt: "Makeup pengantin soft", category: "makeup" },
+  { id: "mu-7", src: `${CLOUD_BASE}/dinar-wedding/gallery/MakeUp/7.jpg`, alt: "Rias pengantin premium", category: "makeup" },
+  { id: "mu-8", src: `${CLOUD_BASE}/dinar-wedding/gallery/MakeUp/8.png`, alt: "Makeup pengantin tradisional", category: "makeup" },
   // Akad
-  { id: "ak-1", src: "/gallery/Akad/001.jpg", alt: "Proses akad nikah", category: "akad" },
-  { id: "ak-2", src: "/gallery/Akad/002.jpg", alt: "Momen akad sakral", category: "akad" },
-  { id: "ak-3", src: "/gallery/Akad/003.jpg", alt: "Pengantin saat akad", category: "akad" },
-  { id: "ak-4", src: "/gallery/Akad/004.jpg", alt: "Sesi akad penuh haru", category: "akad" },
-  { id: "ak-5", src: "/gallery/Akad/005.jpg", alt: "Prosesi ijab kabul", category: "akad" },
-  { id: "ak-7", src: "/gallery/Akad/007.jpg", alt: "Momen akad bahagia", category: "akad" },
-  { id: "ak-8", src: "/gallery/Akad/008.jpg", alt: "Akad nikah khidmat", category: "akad" },
-  { id: "ak-9", src: "/gallery/Akad/009.jpg", alt: "Pengantin saat akad", category: "akad" },
+  { id: "ak-1", src: `${CLOUD_BASE}/dinar-wedding/gallery/Akad/001.jpg`, alt: "Proses akad nikah", category: "akad" },
+  { id: "ak-2", src: `${CLOUD_BASE}/dinar-wedding/gallery/Akad/002.jpg`, alt: "Momen akad sakral", category: "akad" },
+  { id: "ak-3", src: `${CLOUD_BASE}/dinar-wedding/gallery/Akad/003.jpg`, alt: "Pengantin saat akad", category: "akad" },
+  { id: "ak-4", src: `${CLOUD_BASE}/dinar-wedding/gallery/Akad/004.jpg`, alt: "Sesi akad penuh haru", category: "akad" },
+  { id: "ak-5", src: `${CLOUD_BASE}/dinar-wedding/gallery/Akad/005.jpg`, alt: "Prosesi ijab kabul", category: "akad" },
+  { id: "ak-7", src: `${CLOUD_BASE}/dinar-wedding/gallery/Akad/007.jpg`, alt: "Momen akad bahagia", category: "akad" },
+  { id: "ak-8", src: `${CLOUD_BASE}/dinar-wedding/gallery/Akad/008.jpg`, alt: "Akad nikah khidmat", category: "akad" },
+  { id: "ak-9", src: `${CLOUD_BASE}/dinar-wedding/gallery/Akad/009.jpg`, alt: "Pengantin saat akad", category: "akad" },
   // Dekorasi
-  { id: "dek-1", src: "/gallery/Dekorasi/011.jpg", alt: "Dekorasi pelaminan", category: "dekorasi" },
-  { id: "dek-2", src: "/gallery/Dekorasi/012.jpg", alt: "Hiasan dekorasi mewah", category: "dekorasi" },
-  { id: "dek-3", src: "/gallery/Dekorasi/013.jpg", alt: "Dekorasi panggung", category: "dekorasi" },
-  { id: "dek-4", src: "/gallery/Dekorasi/014.jpg", alt: "Dekorasi pengantin", category: "dekorasi" },
-  { id: "dek-5", src: "/gallery/Dekorasi/015.jpg", alt: "Dekorasi pelaminan classic", category: "dekorasi" },
-  { id: "dek-6", src: "/gallery/Dekorasi/016.jpg", alt: "Dekorasi bunga indah", category: "dekorasi" },
-  { id: "dek-7", src: "/gallery/Dekorasi/017.jpg", alt: "Dekorasi resepsi", category: "dekorasi" },
-  { id: "dek-8", src: "/gallery/Dekorasi/018.jpg", alt: "Dekorasi pernikahan", category: "dekorasi" },
+  { id: "dek-1", src: `${CLOUD_BASE}/dinar-wedding/gallery/Dekorasi/011.jpg`, alt: "Dekorasi pelaminan", category: "dekorasi" },
+  { id: "dek-2", src: `${CLOUD_BASE}/dinar-wedding/gallery/Dekorasi/012.jpg`, alt: "Hiasan dekorasi mewah", category: "dekorasi" },
+  { id: "dek-3", src: `${CLOUD_BASE}/dinar-wedding/gallery/Dekorasi/013.jpg`, alt: "Dekorasi panggung", category: "dekorasi" },
+  { id: "dek-4", src: `${CLOUD_BASE}/dinar-wedding/gallery/Dekorasi/014.jpg`, alt: "Dekorasi pengantin", category: "dekorasi" },
+  { id: "dek-5", src: `${CLOUD_BASE}/dinar-wedding/gallery/Dekorasi/015.jpg`, alt: "Dekorasi pelaminan classic", category: "dekorasi" },
+  { id: "dek-6", src: `${CLOUD_BASE}/dinar-wedding/gallery/Dekorasi/016.jpg`, alt: "Dekorasi bunga indah", category: "dekorasi" },
+  { id: "dek-7", src: `${CLOUD_BASE}/dinar-wedding/gallery/Dekorasi/017.jpg`, alt: "Dekorasi resepsi", category: "dekorasi" },
+  { id: "dek-8", src: `${CLOUD_BASE}/dinar-wedding/gallery/Dekorasi/018.jpg`, alt: "Dekorasi pernikahan", category: "dekorasi" },
 ];
 
 export const faqItems = [

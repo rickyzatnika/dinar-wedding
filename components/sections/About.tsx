@@ -24,7 +24,7 @@ export function About() {
         <div className="grid md:grid-cols-2 gap-16 items-center mt-8">
           <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
             <Image
-              src="/gallery/MakeUp/3.png"
+              src="https://res.cloudinary.com/inkara-id/image/upload/dinar-wedding/gallery/MakeUp/3.png"
               alt="Tentang Dinar Wedding"
               fill
               className="object-cover"
