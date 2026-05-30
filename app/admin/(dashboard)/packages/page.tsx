@@ -14,7 +14,7 @@ interface Package {
   isActive?: boolean;
 }
 
-const emptyForm = { name: "", price: 0, description: "", features: "", categories: "", isPopular: false, isActive: true };
+const emptyForm = { name: "", price: 0, description: "", features: "", isPopular: false, isActive: true };
 
 export default function AdminPackagesPage() {
   const [packages, setPackages] = useState<Package[]>([]);
@@ -22,9 +22,11 @@ export default function AdminPackagesPage() {
 
   const [addModal, setAddModal] = useState(false);
   const [addForm, setAddForm] = useState(emptyForm);
+  const [addCategories, setAddCategories] = useState<{ name: string; items: string[] }[]>([]);
 
   const [editModal, setEditModal] = useState(false);
   const [editData, setEditData] = useState<Package | null>(null);
+  const [editCategories, setEditCategories] = useState<{ name: string; items: string[] }[]>([]);
 
   const [deleteModal, setDeleteModal] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
@@ -48,7 +50,7 @@ export default function AdminPackagesPage() {
         price: addForm.price,
         description: addForm.description,
         features: addForm.features.split("\n").filter(Boolean),
-        categories: addForm.categories ? parseCategories(addForm.categories) : undefined,
+        categories: addCategories.length > 0 ? addCategories : undefined,
         isPopular: addForm.isPopular,
         isActive: addForm.isActive,
       }),
@@ -60,18 +62,16 @@ export default function AdminPackagesPage() {
     }
   }
 
-  function parseCategories(raw: string): { name: string; items: string[] }[] {
-    try { return JSON.parse(raw); }
-    catch { return []; }
-  }
-
   async function handleEdit(e: React.FormEvent) {
     e.preventDefault();
     if (!editData) return;
     const res = await fetch(`/api/packages/${editData._id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(editData),
+      body: JSON.stringify({
+        ...editData,
+        categories: editCategories.length > 0 ? editCategories : undefined,
+      }),
     });
     if (res.ok) {
       setPackages((prev) => prev.map((p) => (p._id === editData._id ? editData : p)));
@@ -114,7 +114,7 @@ export default function AdminPackagesPage() {
                 {p.isPopular && <span className="inline-block mt-1 px-2 py-0.5 bg-amber-100 text-amber-700 text-xs rounded-full">Populer</span>}
               </div>
               <div className="flex gap-1">
-                <button onClick={() => { setEditData(p); setEditModal(true); }} className="text-xs text-gray-400 hover:text-gray-600 px-1">Edit</button>
+                <button onClick={() => { setEditData(p); setEditCategories(p.categories ? p.categories.map((c) => ({ name: c.name, items: [...c.items] })) : []); setEditModal(true); }} className="text-xs text-gray-400 hover:text-gray-600 px-1">Edit</button>
                 <button onClick={() => { setDeleteTarget(p._id); setDeleteModal(true); }} className="text-xs text-gray-400 hover:text-red-500 px-1">Hapus</button>
               </div>
             </div>
@@ -126,13 +126,30 @@ export default function AdminPackagesPage() {
         ))}
       </div>
 
-      <Modal open={addModal} onClose={() => { setAddModal(false); setAddForm(emptyForm); }} title="Tambah Paket">
-        <form onSubmit={handleAdd} className="space-y-3">
+      <Modal open={addModal} onClose={() => { setAddModal(false); setAddForm(emptyForm); setAddCategories([]); }} title="Tambah Paket">
+        <form onSubmit={handleAdd} className="space-y-3 overflow-y-auto max-h-[70vh] pr-1">
           <input type="text" value={addForm.name} onChange={(e) => setAddForm({ ...addForm, name: e.target.value })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" required placeholder="Nama Paket" />
           <input type="number" value={addForm.price} onChange={(e) => setAddForm({ ...addForm, price: Number(e.target.value) })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" required placeholder="Harga" />
           <textarea value={addForm.description} onChange={(e) => setAddForm({ ...addForm, description: e.target.value })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" rows={3} placeholder="Deskripsi" />
           <textarea value={addForm.features} onChange={(e) => setAddForm({ ...addForm, features: e.target.value })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" rows={4} placeholder="Fitur (pisahkan dengan baris baru)" />
-          <textarea value={addForm.categories} onChange={(e) => setAddForm({ ...addForm, categories: e.target.value })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" rows={3} placeholder='Kategori (JSON, contoh: [{"name":"Dekorasi","items":["item1","item2"]}])' />
+
+          <div className="border border-gray-200 rounded-lg p-3 space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium text-gray-700">Kategori</span>
+              <button type="button" onClick={() => setAddCategories([...addCategories, { name: "", items: [] }])} className="text-xs text-[#C97B7B] hover:text-[#b86a6a] font-medium">+ Tambah Kategori</button>
+            </div>
+            {addCategories.map((cat, i) => (
+              <div key={i} className="border border-gray-100 rounded-lg p-3 space-y-2">
+                <div className="flex items-center gap-2">
+                  <input type="text" value={cat.name} onChange={(e) => { const c = [...addCategories]; c[i] = { ...c[i], name: e.target.value }; setAddCategories(c); }} className="flex-1 px-2 py-1.5 border border-gray-300 rounded text-sm" placeholder="Nama kategori" />
+                  <button type="button" onClick={() => setAddCategories(addCategories.filter((_, j) => j !== i))} className="text-xs text-red-400 hover:text-red-600">Hapus</button>
+                </div>
+                <textarea value={cat.items.join("\n")} onChange={(e) => { const c = [...addCategories]; c[i] = { ...c[i], items: e.target.value.split("\n") }; setAddCategories(c); }} className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm" rows={3} placeholder="Item (pisahkan dengan baris baru)" />
+              </div>
+            ))}
+            {addCategories.length === 0 && <p className="text-xs text-gray-400 text-center py-2">Belum ada kategori</p>}
+          </div>
+
           <div className="flex gap-4">
             <label className="flex items-center gap-2">
               <input type="checkbox" checked={addForm.isPopular} onChange={(e) => setAddForm({ ...addForm, isPopular: e.target.checked })} className="rounded" />
@@ -145,19 +162,36 @@ export default function AdminPackagesPage() {
           </div>
           <div className="flex gap-3 pt-2">
             <button type="submit" className="px-4 py-2 bg-[#C97B7B] text-white rounded-lg text-sm font-medium">Simpan</button>
-            <button type="button" onClick={() => { setAddModal(false); setAddForm(emptyForm); }} className="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm">Batal</button>
+            <button type="button" onClick={() => { setAddModal(false); setAddForm(emptyForm); setAddCategories([]); }} className="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm">Batal</button>
           </div>
         </form>
       </Modal>
 
       <Modal open={editModal} onClose={() => setEditModal(false)} title="Edit Paket">
         {editData && (
-          <form onSubmit={handleEdit} className="space-y-3">
+          <form onSubmit={handleEdit} className="space-y-3 overflow-y-auto max-h-[70vh] pr-1">
             <input type="text" value={editData.name} onChange={(e) => setEditData({ ...editData, name: e.target.value })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" required placeholder="Nama Paket" />
             <input type="number" value={editData.price} onChange={(e) => setEditData({ ...editData, price: Number(e.target.value) })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" required placeholder="Harga" />
             <textarea value={editData.description} onChange={(e) => setEditData({ ...editData, description: e.target.value })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" rows={3} placeholder="Deskripsi" />
             <textarea value={editData.features?.join("\n") || ""} onChange={(e) => setEditData({ ...editData, features: e.target.value.split("\n") })} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm" rows={4} placeholder="Fitur (pisahkan dengan baris baru)" />
-            <textarea value={editData.categories ? JSON.stringify(editData.categories, null, 2) : ""} onChange={(e) => { try { setEditData({ ...editData, categories: JSON.parse(e.target.value) }); } catch { /* invalid JSON */ } }} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm font-mono" rows={3} placeholder='Kategori (JSON)' />
+
+            <div className="border border-gray-200 rounded-lg p-3 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-gray-700">Kategori</span>
+                <button type="button" onClick={() => setEditCategories([...editCategories, { name: "", items: [] }])} className="text-xs text-[#C97B7B] hover:text-[#b86a6a] font-medium">+ Tambah Kategori</button>
+              </div>
+              {editCategories.map((cat, i) => (
+                <div key={i} className="border border-gray-100 rounded-lg p-3 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <input type="text" value={cat.name} onChange={(e) => { const c = [...editCategories]; c[i] = { ...c[i], name: e.target.value }; setEditCategories(c); }} className="flex-1 px-2 py-1.5 border border-gray-300 rounded text-sm" placeholder="Nama kategori" />
+                    <button type="button" onClick={() => setEditCategories(editCategories.filter((_, j) => j !== i))} className="text-xs text-red-400 hover:text-red-600">Hapus</button>
+                  </div>
+                  <textarea value={cat.items.join("\n")} onChange={(e) => { const c = [...editCategories]; c[i] = { ...c[i], items: e.target.value.split("\n") }; setEditCategories(c); }} className="w-full px-2 py-1.5 border border-gray-300 rounded text-sm" rows={3} placeholder="Item (pisahkan dengan baris baru)" />
+                </div>
+              ))}
+              {editCategories.length === 0 && <p className="text-xs text-gray-400 text-center py-2">Belum ada kategori</p>}
+            </div>
+
             <div className="flex gap-4">
               <label className="flex items-center gap-2">
                 <input type="checkbox" checked={editData.isPopular} onChange={(e) => setEditData({ ...editData, isPopular: e.target.checked })} className="rounded" />
