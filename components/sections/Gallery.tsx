@@ -1,10 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { galleryImages } from "@/lib/data";
 import { FadeUp } from "@/components/animation/FadeUp";
+
+interface GalleryItem {
+  _id: string;
+  src: string;
+  alt: string;
+  category: string;
+}
 
 const categories = [
   { value: "makeup", label: "Makeup" },
@@ -13,10 +19,18 @@ const categories = [
 ];
 
 export function Gallery() {
+  const [items, setItems] = useState<GalleryItem[]>([]);
   const [active, setActive] = useState("makeup");
   const [selected, setSelected] = useState<string | null>(null);
 
-  const filtered = galleryImages.filter((img) => img.category === active);
+  useEffect(() => {
+    fetch("/api/gallery")
+      .then((res) => res.json())
+      .then(setItems)
+      .catch(() => {});
+  }, []);
+
+  const filtered = items.filter((img) => img.category === active);
 
   return (
     <section id="galeri" className="py-24 bg-white">
@@ -43,7 +57,7 @@ export function Gallery() {
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {filtered.map((img, i) => (
-            <FadeUp key={img.id} delay={i * 0.08}>
+            <FadeUp key={img._id} delay={i * 0.08}>
               <button
                 onClick={() => setSelected(img.src)}
                 className="aspect-[4/5] relative rounded-xl overflow-hidden group w-full"
