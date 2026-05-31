@@ -117,3 +117,211 @@ whatsapp-bot/
 - **Phone conversion** — `08xx` → `628xx` otomatis, fallback ke JID
 - **Scheduled messages** — `setTimeout`-based reminder/chat scheduler
 - **fromMe filter** — hanya skip self-messages non-`/`; `/` commands tetap diproses meskipun dari bot sendiri
+
+
+
+
+# Automatic Follow Up Bot
+
+## Objective
+
+Implement an automatic follow-up system for WhatsApp users.
+
+This feature is NOT AI-powered.
+
+Do not use Groq AI.
+
+Do not create conversational AI responses.
+
+All follow-up messages must use predefined templates.
+
+The goal is to re-engage users who showed interest but did not continue the booking process.
+
+---
+
+## Existing Architecture Requirements
+
+The project already contains:
+
+* Baileys WhatsApp connection
+* Intent-based bot flow
+* Booking form flow
+* Admin AI system
+* Scheduler/reminder capability
+* MongoDB database
+
+Reuse existing architecture whenever possible.
+
+Do not create a second messaging system.
+
+Do not bypass orchestrator.js.
+
+Do not create duplicate scheduling logic if an existing scheduler can be extended.
+
+---
+
+## Trigger Events
+
+Create follow-up records when:
+
+### Package Interest
+
+User asks about:
+
+* paket
+* harga
+* package
+* wedding package
+
+and receives package information.
+
+Event Type:
+
+package_interest
+
+---
+
+### Booking Started
+
+User enters booking flow but does not complete all required fields.
+
+Event Type:
+
+booking_started
+
+---
+
+## Follow Up Templates
+
+### package_interest
+
+Delay:
+
+24 hours
+
+Message:
+
+Halo {{name}} 👋
+
+Kemarin Anda melihat paket wedding kami.
+
+Apakah ada yang ingin ditanyakan?
+
+Balas:
+
+1️⃣ Ya
+2️⃣ Tidak
+
+---
+
+### booking_started
+
+Delay:
+
+6 hours
+
+Message:
+
+Halo {{name}} 👋
+
+Kami melihat Anda belum menyelesaikan proses booking.
+
+Jika membutuhkan bantuan, silakan balas pesan ini.
+
+---
+
+## User Response Handling
+
+If user replies:
+
+1
+
+Route user to:
+
+ADMIN_CONTACT
+
+or existing contact-admin flow.
+
+---
+
+If user replies:
+
+2
+
+Mark follow-up as completed.
+
+No further follow-up for that event.
+
+---
+
+## Follow Up Storage
+
+Create MongoDB collection:
+
+FollowUp
+
+Fields:
+
+* jid
+* pushName
+* eventType
+* status
+* scheduledAt
+* sentAt
+* respondedAt
+* createdAt
+
+Status:
+
+* pending
+* sent
+* completed
+* cancelled
+
+---
+
+## Duplicate Protection
+
+Never create duplicate follow-ups.
+
+Example:
+
+If a user already has:
+
+package_interest
+status=pending
+
+Do not create another package_interest record.
+
+---
+
+## Scheduler
+
+Reuse existing reminder/schedule infrastructure whenever possible.
+
+Avoid introducing a new scheduler architecture.
+
+The scheduler must:
+
+* find pending follow-ups
+* check scheduledAt
+* send WhatsApp message
+* mark status=sent
+
+---
+
+## Important
+
+Use JID as the primary user identifier.
+
+Do not depend on phone numbers.
+
+Baileys may return LID-based JIDs.
+
+All follow-up functionality must work using the JID already available in the existing message pipeline.
+
+Never require Cloud API.
+
+Never require WhatsApp phone number extraction.
+
+The stored JID must be sufficient for future follow-up delivery.
